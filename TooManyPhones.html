@@ -63,7 +63,7 @@ function buyTooManyPhones(bankBalance, spendingLimit){
     totalPhones += phoneCount;
     totalAccessories += accessoryCount;
     totalMoneySpent += totalAmount;
-    if (phoneCount == 0){
+    if (phoneCount === 0){
       console.log("You are done going to the phone store. I hope you're happy.");
       break;
     }
