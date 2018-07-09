@@ -1,5 +1,5 @@
 <script>
-
+"use strict";
 const TAX_RATE = 0.08;
 const PHONE_PRICE = 99.99;
 const ACCESSORY_PRICE = 7.99;
@@ -26,14 +26,14 @@ function buyAPhone(bankBalance, spendingLimit, actualPhonePrice, actualAccessory
     console.log("You can't imagine spending that much on a phone!");
     return [phoneCount, accessoryCount, totalAmount];
   }
-  effectiveMoney = Math.min(bankBalance, spendingLimit);
+  var effectiveMoney = Math.min(bankBalance, spendingLimit);
   if (effectiveMoney >= actualPhonePrice){
     console.log("Buying a new phone at", formatCost(actualPhonePrice));
     totalAmount += actualPhonePrice;
     phoneCount = 1;
   }
   effectiveMoney -= actualPhonePrice;
-  accessoryCount = Math.floor(effectiveMoney/actualAccessoryPrice);
+  var accessoryCount = Math.floor(effectiveMoney/actualAccessoryPrice);
   console.log("Buying", accessoryCount, "accessories at", formatCost(actualAccessoryPrice), "each");
   totalAmount += accessoryCount*actualAccessoryPrice;
   return [phoneCount, accessoryCount, totalAmount];
@@ -47,16 +47,18 @@ function updateBankBalance(spending, bankBalance){
 }
 
 function buyTooManyPhones(bankBalance, spendingLimit){
-  actualPhonePrice = calculateTotal(PHONE_PRICE);
-  actualAccessoryPrice = calculateTotal(ACCESSORY_PRICE);
-  totalPhones = 0;
-  totalAccessories = 0;
-  totalMoneySpent = 0;
+  var actualPhonePrice = calculateTotal(PHONE_PRICE);
+  var actualAccessoryPrice = calculateTotal(ACCESSORY_PRICE);
+
+  var totalPhones = 0;
+  var totalAccessories = 0;
+  var totalMoneySpent = 0;
+
   while(true){
-    buyArray = buyAPhone(bankBalance, spendingLimit, actualPhonePrice, actualAccessoryPrice);
-    phoneCount = buyArray[0];
-    accessoryCount = buyArray[1];
-    totalAmount = buyArray[2];
+    var buyArray = buyAPhone(bankBalance, spendingLimit, actualPhonePrice, actualAccessoryPrice);
+    var phoneCount = buyArray[0];
+    var accessoryCount = buyArray[1];
+    var totalAmount = buyArray[2];
     bankBalance = updateBankBalance(totalAmount, bankBalance);
     totalPhones += phoneCount;
     totalAccessories += accessoryCount;
@@ -73,8 +75,8 @@ function buyTooManyPhones(bankBalance, spendingLimit){
 }
 
 function askUserHowManyPhones(){
-  bankBalance = prompt("How much money is in your bank account?");
-  spendingLimit = prompt("How much at most would you spend for a phone and accessories?");
+  var bankBalance = prompt("How much money is in your bank account?");
+  var spendingLimit = prompt("How much at most would you spend for a phone and accessories?");
   console.log("Well, why don't you go and do it then?");
   buyTooManyPhones(bankBalance, spendingLimit);
 }
